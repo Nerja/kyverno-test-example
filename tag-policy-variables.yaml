@@ -1,0 +1,8 @@
+policies:
+  - name: flux-gitops-core-tags
+    rules:
+    - name: flux-gitops-core-tags
+      values:
+        nslabels: 
+          - key: a
+            value: b

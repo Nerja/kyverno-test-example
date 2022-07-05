@@ -1,0 +1,6 @@
+apiVersion: database.core.example.com/v1alpha1
+kind: MySQLInstance
+metadata:
+  name: db
+  namespace: default
+spec: {}

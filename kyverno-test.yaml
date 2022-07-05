@@ -1,0 +1,14 @@
+name: policy-tests
+policies:
+  - tag-policy.yaml
+resources:
+  - tag-policy-resource.yaml
+variables: tag-policy-variables.yaml
+results:
+  - policy: flux-gitops-core-tags
+    rule: flux-gitops-core-tags
+    patchedResource: tag-policy-patched-resource.yaml
+    kind: MySQLInstance
+    result: pass
+    resource: db
+    namespace: default

@@ -1,0 +1,25 @@
+apiVersion : kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: flux-gitops-core-tags
+spec:
+  background: false
+  rules:
+  - name: flux-gitops-core-tags
+    match:
+      any:
+      - resources:
+          kinds:
+          - MySQLInstance
+    context:
+    - name: nslabels
+      apiCall:
+        urlPath: /api/v1/namespaces/{{ request.namespace }}
+        jmesPath: items(metadata.labels,'key','value')
+    mutate:
+      foreach:
+      - list: "nslabels"
+        patchesJson6902: |-
+          - path: "/spec/parameters/tags/-"
+            op: add
+            value: {"key": "{{element.key}}", "value": "{{element.value}}"}
